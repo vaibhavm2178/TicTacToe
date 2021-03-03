@@ -1,0 +1,65 @@
+package tictactoe;
+
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        print();
+
+    }
+
+    static void print() {
+        int xs = 0, os = 0;
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter cells: ");
+        String str = scanner.next();
+//        String[] array = str.split("");
+        char[] cells = str.toCharArray();
+        System.out.println("---------");
+        System.out.println("| " + cells[0] + " " + cells[1] + " " + cells[2] + " |");
+        System.out.println("| " + cells[3] + " " + cells[4] + " " + cells[5] + " |");
+        System.out.println("| " + cells[6] + " " + cells[7] + " " + cells[8] + " |");
+        System.out.println("---------");
+        for (int i = 0; i < cells.length; i++) {
+            if (cells[i] == 'X') xs++;
+            else if (cells[i] == 'O') os++;
+        }
+        int xWin = 0;
+        int oWin = 0;
+        int row1 = cells[0] + cells[1] + cells[2];
+        int row2 = cells[3] + cells[4] + cells[5];
+        int row3 = cells[6] + cells[7] + cells[8];
+        int col1 = cells[0] + cells[3] + cells[6];
+        int col2 = cells[1] + cells[4] + cells[7];
+        int col3 = cells[2] + cells[5] + cells[8];
+        int diag1 = cells[0] + cells[4] + cells[8];
+        int diag2 = cells[2] + cells[4] + cells[6];
+
+
+        if (row1 == 264 || row2 == 264 || row3 == 264 || col1 == 264 || col2 == 264 || col3 == 264
+            || diag1 == 264 || diag2 == 264) {
+            xWin = 1;
+        }
+        if (row1 == 237 || row2 == 237 || row3 == 237 || col1 == 237 || col2 == 237 || col3 == 237
+                || diag1 == 237 || diag2 == 237) {
+            oWin = 1;
+        }
+        if (Math.abs(xs - os) > 1 || (xWin>0 && oWin >0)) {
+            System.out.println("Impossible");
+            return;
+        }
+
+        if ((xs + os == 9 && (xWin == 0 && oWin == 0))) {
+            System.out.println("Draw");
+            return;
+        }
+
+        if ((xs + os < 9 && (xWin == 0 && oWin == 0))) {
+            System.out.println("Game not finished");
+            return;
+        }
+        if (xWin == 1 && oWin == 0) System.out.println("X wins");
+        if (xWin == 0 && oWin == 1) System.out.println("O wins");
+    }
+}
